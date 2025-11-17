@@ -37,12 +37,12 @@
             TL4 = new TableLayoutPanel();
             lbTitulo = new MaterialSkin.Controls.MaterialLabel();
             tvArbol = new TreeView();
-            cmsARbol = new ContextMenuStrip(components);
-            agregarCargoToolStripMenuItem = new ToolStripMenuItem();
-            elimiarCargoToolStripMenuItem = new ToolStripMenuItem();
-            renombrarToolStripMenuItem = new ToolStripMenuItem();
+            cmsArbol = new ContextMenuStrip(components);
+            btnAgregarArbol = new ToolStripMenuItem();
+            btnEliminarArbol = new ToolStripMenuItem();
+            btnRenombrarArbol = new ToolStripMenuItem();
             TL6 = new TableLayoutPanel();
-            btnBuscar = new MaterialSkin.Controls.MaterialButton();
+            btnBuscarArbol = new MaterialSkin.Controls.MaterialButton();
             lbActualización = new MaterialSkin.Controls.MaterialLabel();
             TL3 = new TableLayoutPanel();
             TL5 = new TableLayoutPanel();
@@ -60,7 +60,7 @@
             TL1.SuspendLayout();
             TL2.SuspendLayout();
             TL4.SuspendLayout();
-            cmsARbol.SuspendLayout();
+            cmsArbol.SuspendLayout();
             TL6.SuspendLayout();
             TL3.SuspendLayout();
             TL5.SuspendLayout();
@@ -173,7 +173,7 @@
             // 
             // tvArbol
             // 
-            tvArbol.ContextMenuStrip = cmsARbol;
+            tvArbol.ContextMenuStrip = cmsArbol;
             tvArbol.Dock = DockStyle.Fill;
             tvArbol.Location = new Point(3, 31);
             tvArbol.Name = "tvArbol";
@@ -181,37 +181,40 @@
             tvArbol.TabIndex = 1;
             tvArbol.AfterSelect += tvArbol_AfterSelect;
             // 
-            // cmsARbol
+            // cmsArbol
             // 
-            cmsARbol.ImageScalingSize = new Size(20, 20);
-            cmsARbol.Items.AddRange(new ToolStripItem[] { agregarCargoToolStripMenuItem, elimiarCargoToolStripMenuItem, renombrarToolStripMenuItem });
-            cmsARbol.Name = "cmsARbol";
-            cmsARbol.Size = new Size(177, 76);
+            cmsArbol.ImageScalingSize = new Size(20, 20);
+            cmsArbol.Items.AddRange(new ToolStripItem[] { btnAgregarArbol, btnEliminarArbol, btnRenombrarArbol });
+            cmsArbol.Name = "cmsARbol";
+            cmsArbol.Size = new Size(177, 76);
             // 
-            // agregarCargoToolStripMenuItem
+            // btnAgregarArbol
             // 
-            agregarCargoToolStripMenuItem.Name = "agregarCargoToolStripMenuItem";
-            agregarCargoToolStripMenuItem.Size = new Size(176, 24);
-            agregarCargoToolStripMenuItem.Text = "Agregar Cargo";
+            btnAgregarArbol.Name = "btnAgregarArbol";
+            btnAgregarArbol.Size = new Size(176, 24);
+            btnAgregarArbol.Text = "Agregar Cargo";
+            btnAgregarArbol.Click += agregarCargoToolStripMenuItem_Click;
             // 
-            // elimiarCargoToolStripMenuItem
+            // btnEliminarArbol
             // 
-            elimiarCargoToolStripMenuItem.Name = "elimiarCargoToolStripMenuItem";
-            elimiarCargoToolStripMenuItem.Size = new Size(176, 24);
-            elimiarCargoToolStripMenuItem.Text = "Elimiar Cargo";
+            btnEliminarArbol.Name = "btnEliminarArbol";
+            btnEliminarArbol.Size = new Size(176, 24);
+            btnEliminarArbol.Text = "Elimiar Cargo";
+            btnEliminarArbol.Click += elimiarCargoToolStripMenuItem_Click;
             // 
-            // renombrarToolStripMenuItem
+            // btnRenombrarArbol
             // 
-            renombrarToolStripMenuItem.Name = "renombrarToolStripMenuItem";
-            renombrarToolStripMenuItem.Size = new Size(176, 24);
-            renombrarToolStripMenuItem.Text = "Renombrar";
+            btnRenombrarArbol.Name = "btnRenombrarArbol";
+            btnRenombrarArbol.Size = new Size(176, 24);
+            btnRenombrarArbol.Text = "Renombrar";
+            btnRenombrarArbol.Click += renombrarToolStripMenuItem_Click;
             // 
             // TL6
             // 
             TL6.ColumnCount = 2;
             TL6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 59.39525F));
             TL6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40.60475F));
-            TL6.Controls.Add(btnBuscar, 1, 0);
+            TL6.Controls.Add(btnBuscarArbol, 1, 0);
             TL6.Controls.Add(lbActualización, 0, 0);
             TL6.Dock = DockStyle.Fill;
             TL6.Location = new Point(3, 430);
@@ -221,25 +224,26 @@
             TL6.Size = new Size(463, 33);
             TL6.TabIndex = 1;
             // 
-            // btnBuscar
+            // btnBuscarArbol
             // 
-            btnBuscar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnBuscar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnBuscar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnBuscar.Depth = 0;
-            btnBuscar.HighEmphasis = true;
-            btnBuscar.Icon = null;
-            btnBuscar.Location = new Point(279, 6);
-            btnBuscar.Margin = new Padding(4, 6, 4, 6);
-            btnBuscar.MouseState = MaterialSkin.MouseState.HOVER;
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.NoAccentTextColor = Color.Empty;
-            btnBuscar.Size = new Size(180, 21);
-            btnBuscar.TabIndex = 0;
-            btnBuscar.Text = "Buscar Cargo";
-            btnBuscar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnBuscar.UseAccentColor = false;
-            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscarArbol.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnBuscarArbol.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnBuscarArbol.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnBuscarArbol.Depth = 0;
+            btnBuscarArbol.HighEmphasis = true;
+            btnBuscarArbol.Icon = null;
+            btnBuscarArbol.Location = new Point(279, 6);
+            btnBuscarArbol.Margin = new Padding(4, 6, 4, 6);
+            btnBuscarArbol.MouseState = MaterialSkin.MouseState.HOVER;
+            btnBuscarArbol.Name = "btnBuscarArbol";
+            btnBuscarArbol.NoAccentTextColor = Color.Empty;
+            btnBuscarArbol.Size = new Size(180, 21);
+            btnBuscarArbol.TabIndex = 0;
+            btnBuscarArbol.Text = "Buscar Cargo";
+            btnBuscarArbol.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnBuscarArbol.UseAccentColor = false;
+            btnBuscarArbol.UseVisualStyleBackColor = true;
+            btnBuscarArbol.Click += btnBuscar_Click;
             // 
             // lbActualización
             // 
@@ -255,6 +259,7 @@
             lbActualización.TabIndex = 1;
             lbActualización.Text = "Mensaje de actualización";
             lbActualización.TextAlign = ContentAlignment.MiddleCenter;
+            lbActualización.Click += lbActualización_Click;
             // 
             // TL3
             // 
@@ -302,6 +307,7 @@
             lbEstadisticas.TabIndex = 2;
             lbEstadisticas.Text = "Estadísticas:";
             lbEstadisticas.TextAlign = ContentAlignment.MiddleCenter;
+            lbEstadisticas.Click += lbEstadisticas_Click;
             // 
             // lvEstadisticas
             // 
@@ -391,6 +397,7 @@
             mltOrden.TabStop = false;
             mltOrden.TextAlign = HorizontalAlignment.Left;
             mltOrden.UseSystemPasswordChar = false;
+            mltOrden.Click += mltOrden_Click;
             // 
             // tabPage2
             // 
@@ -434,7 +441,7 @@
             TL2.ResumeLayout(false);
             TL4.ResumeLayout(false);
             TL4.PerformLayout();
-            cmsARbol.ResumeLayout(false);
+            cmsArbol.ResumeLayout(false);
             TL6.ResumeLayout(false);
             TL6.PerformLayout();
             TL3.ResumeLayout(false);
@@ -462,16 +469,16 @@
         private TableLayoutPanel TL5;
         private ListView lvEstadisticas;
         private TableLayoutPanel TL7;
-        private MaterialSkin.Controls.MaterialButton btnBuscar;
+        private MaterialSkin.Controls.MaterialButton btnBuscarArbol;
         private TableLayoutPanel TL8;
         private MaterialSkin.Controls.MaterialLabel lbActualización;
         private MaterialSkin.Controls.MaterialLabel lbTitulo;
         private MaterialSkin.Controls.MaterialLabel lbEstadisticas;
         public MaterialSkin.Controls.MaterialComboBox cbOrdenamiento;
         private MaterialSkin.Controls.MaterialMultiLineTextBox2 mltOrden;
-        private ContextMenuStrip cmsARbol;
-        private ToolStripMenuItem agregarCargoToolStripMenuItem;
-        private ToolStripMenuItem elimiarCargoToolStripMenuItem;
-        private ToolStripMenuItem renombrarToolStripMenuItem;
+        private ContextMenuStrip cmsArbol;
+        private ToolStripMenuItem btnAgregarArbol;
+        private ToolStripMenuItem btnEliminarArbol;
+        private ToolStripMenuItem btnRenombrarArbol;
     }
 }

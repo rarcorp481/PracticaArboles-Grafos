@@ -19,10 +19,11 @@ namespace casoDeEstudio
         {
             InitializeComponent();
 
-            var materialSkinManager = MaterialSkinManager.Instance;
-            materialSkinManager.AddFormToManage(this);
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            var materialSkinManager = MaterialSkinManager.Instance; // Obtiene la instancia del administrador de MaterialSkin
+            materialSkinManager.AddFormToManage(this); // Agrega el formulario al administrador de MaterialSkin
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT; // Tema del formulario
 
+            // Esquema de colore del formulario
             materialSkinManager.ColorScheme = new ColorScheme(
                 Primary.BlueGrey800,
                 Primary.BlueGrey900,
@@ -38,6 +39,63 @@ namespace casoDeEstudio
         }
 
 
+        private void tvArbol_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+
+        // BUTTONS & COMBOBOX:
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void agregarCargoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // agregar cargo
+        }
+
+        private void elimiarCargoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // eliminar cargo
+        }
+
+        private void renombrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // renombrar cargo
+        }
+
+        private void cbOrdenamiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // lABELS:
+
+        private void materialLabel2_Click(object sender, EventArgs e)
+        {
+            // label de título 
+        }
+
+        private void lbEstadisticas_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbActualización_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mltOrden_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // TABLELAYOUTS:
+
         private void TL1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -50,7 +108,7 @@ namespace casoDeEstudio
 
         private void TL3_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -58,19 +116,6 @@ namespace casoDeEstudio
 
         }
 
-        private void materialLabel2_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void cbOrdenamiento_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tvArbol_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
     }
 }
