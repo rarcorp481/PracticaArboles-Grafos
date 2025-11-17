@@ -212,6 +212,7 @@
             btnBuscarArbol.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnBuscarArbol.UseAccentColor = false;
             btnBuscarArbol.UseVisualStyleBackColor = true;
+            btnBuscarArbol.Click += BtnBuscarArbol_Click;
             // 
             // lbActualización
             // 
@@ -360,6 +361,7 @@
             mltOrden.TabStop = false;
             mltOrden.TextAlign = HorizontalAlignment.Left;
             mltOrden.UseSystemPasswordChar = false;
+            mltOrden.Click += mltOrden_Click_1;
             // 
             // FrmPrincipal
             // 
