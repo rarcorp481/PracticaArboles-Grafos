@@ -34,17 +34,18 @@
             TL1 = new TableLayoutPanel();
             TL2 = new TableLayoutPanel();
             TL4 = new TableLayoutPanel();
+            lbTitulo = new MaterialSkin.Controls.MaterialLabel();
             tvArbol = new TreeView();
-            lbArbol = new MaterialSkin.Controls.MaterialLabel();
             TL6 = new TableLayoutPanel();
             btnBuscar = new MaterialSkin.Controls.MaterialButton();
-            materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             TL3 = new TableLayoutPanel();
             TL5 = new TableLayoutPanel();
+            lbEstadisticas = new MaterialSkin.Controls.MaterialLabel();
             lvEstadisticas = new ListView();
-            materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             TL7 = new TableLayoutPanel();
-            materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
+            TL8 = new TableLayoutPanel();
+            cbOrdenamiento = new MaterialSkin.Controls.MaterialComboBox();
             tabPage2 = new TabPage();
             TabL1 = new TableLayoutPanel();
             tabGrafos.SuspendLayout();
@@ -57,6 +58,7 @@
             TL3.SuspendLayout();
             TL5.SuspendLayout();
             TL7.SuspendLayout();
+            TL8.SuspendLayout();
             tabPage2.SuspendLayout();
             SuspendLayout();
             // 
@@ -133,16 +135,34 @@
             // 
             TL4.ColumnCount = 1;
             TL4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            TL4.Controls.Add(lbTitulo, 0, 0);
             TL4.Controls.Add(tvArbol, 0, 1);
-            TL4.Controls.Add(lbArbol, 0, 0);
             TL4.Dock = DockStyle.Fill;
             TL4.Location = new Point(3, 3);
             TL4.Name = "TL4";
             TL4.RowCount = 2;
             TL4.RowStyles.Add(new RowStyle(SizeType.Percent, 6.67976427F));
             TL4.RowStyles.Add(new RowStyle(SizeType.Percent, 93.32024F));
+            TL4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             TL4.Size = new Size(463, 421);
             TL4.TabIndex = 0;
+            // 
+            // lbTitulo
+            // 
+            lbTitulo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lbTitulo.AutoSize = true;
+            lbTitulo.BorderStyle = BorderStyle.FixedSingle;
+            lbTitulo.Depth = 0;
+            lbTitulo.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
+            lbTitulo.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            lbTitulo.Location = new Point(3, 0);
+            lbTitulo.MouseState = MaterialSkin.MouseState.HOVER;
+            lbTitulo.Name = "lbTitulo";
+            lbTitulo.Size = new Size(457, 28);
+            lbTitulo.TabIndex = 2;
+            lbTitulo.Text = "Esquema Jerárquico de la Empresa:";
+            lbTitulo.TextAlign = ContentAlignment.MiddleCenter;
+            lbTitulo.Click += materialLabel2_Click;
             // 
             // tvArbol
             // 
@@ -152,26 +172,13 @@
             tvArbol.Size = new Size(457, 387);
             tvArbol.TabIndex = 1;
             // 
-            // lbArbol
-            // 
-            lbArbol.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lbArbol.Depth = 0;
-            lbArbol.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            lbArbol.Location = new Point(3, 0);
-            lbArbol.MouseState = MaterialSkin.MouseState.HOVER;
-            lbArbol.Name = "lbArbol";
-            lbArbol.Size = new Size(457, 28);
-            lbArbol.TabIndex = 2;
-            lbArbol.Text = "Esquema Jerárquico de la Empresa";
-            lbArbol.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // TL6
             // 
             TL6.ColumnCount = 2;
-            TL6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 53.75F));
-            TL6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 46.25F));
+            TL6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 59.39525F));
+            TL6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40.60475F));
             TL6.Controls.Add(btnBuscar, 1, 0);
-            TL6.Controls.Add(materialLabel3, 0, 0);
+            TL6.Controls.Add(materialLabel1, 0, 0);
             TL6.Dock = DockStyle.Fill;
             TL6.Location = new Point(3, 430);
             TL6.Name = "TL6";
@@ -188,29 +195,32 @@
             btnBuscar.Depth = 0;
             btnBuscar.HighEmphasis = true;
             btnBuscar.Icon = null;
-            btnBuscar.Location = new Point(252, 6);
+            btnBuscar.Location = new Point(279, 6);
             btnBuscar.Margin = new Padding(4, 6, 4, 6);
             btnBuscar.MouseState = MaterialSkin.MouseState.HOVER;
             btnBuscar.Name = "btnBuscar";
             btnBuscar.NoAccentTextColor = Color.Empty;
-            btnBuscar.Size = new Size(207, 21);
+            btnBuscar.Size = new Size(180, 21);
             btnBuscar.TabIndex = 0;
             btnBuscar.Text = "Buscar Cargo";
             btnBuscar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnBuscar.UseAccentColor = false;
             btnBuscar.UseVisualStyleBackColor = true;
             // 
-            // materialLabel3
+            // materialLabel1
             // 
-            materialLabel3.AutoSize = true;
-            materialLabel3.Depth = 0;
-            materialLabel3.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel3.Location = new Point(3, 0);
-            materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel3.Name = "materialLabel3";
-            materialLabel3.Size = new Size(107, 19);
-            materialLabel3.TabIndex = 1;
-            materialLabel3.Text = "materialLabel3";
+            materialLabel1.AutoSize = true;
+            materialLabel1.Depth = 0;
+            materialLabel1.Dock = DockStyle.Fill;
+            materialLabel1.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            materialLabel1.Location = new Point(3, 0);
+            materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel1.Name = "materialLabel1";
+            materialLabel1.Size = new Size(269, 33);
+            materialLabel1.TabIndex = 1;
+            materialLabel1.Text = "Mensaje de actualización";
+            materialLabel1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // TL3
             // 
@@ -231,8 +241,8 @@
             // 
             TL5.ColumnCount = 1;
             TL5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            TL5.Controls.Add(lbEstadisticas, 0, 0);
             TL5.Controls.Add(lvEstadisticas, 0, 1);
-            TL5.Controls.Add(materialLabel2, 0, 0);
             TL5.Dock = DockStyle.Fill;
             TL5.Location = new Point(3, 3);
             TL5.Name = "TL5";
@@ -241,6 +251,23 @@
             TL5.RowStyles.Add(new RowStyle(SizeType.Percent, 87.95621F));
             TL5.Size = new Size(447, 227);
             TL5.TabIndex = 0;
+            // 
+            // lbEstadisticas
+            // 
+            lbEstadisticas.AutoEllipsis = true;
+            lbEstadisticas.AutoSize = true;
+            lbEstadisticas.BorderStyle = BorderStyle.FixedSingle;
+            lbEstadisticas.Depth = 0;
+            lbEstadisticas.Dock = DockStyle.Fill;
+            lbEstadisticas.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
+            lbEstadisticas.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
+            lbEstadisticas.Location = new Point(3, 0);
+            lbEstadisticas.MouseState = MaterialSkin.MouseState.HOVER;
+            lbEstadisticas.Name = "lbEstadisticas";
+            lbEstadisticas.Size = new Size(441, 27);
+            lbEstadisticas.TabIndex = 2;
+            lbEstadisticas.Text = "Estadísticas:";
+            lbEstadisticas.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lvEstadisticas
             // 
@@ -251,43 +278,59 @@
             lvEstadisticas.TabIndex = 1;
             lvEstadisticas.UseCompatibleStateImageBehavior = false;
             // 
-            // materialLabel2
-            // 
-            materialLabel2.AutoSize = true;
-            materialLabel2.Depth = 0;
-            materialLabel2.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel2.Location = new Point(3, 0);
-            materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel2.Name = "materialLabel2";
-            materialLabel2.Size = new Size(107, 19);
-            materialLabel2.TabIndex = 2;
-            materialLabel2.Text = "materialLabel2";
-            // 
             // TL7
             // 
             TL7.ColumnCount = 1;
             TL7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            TL7.Controls.Add(materialLabel4, 0, 0);
+            TL7.Controls.Add(TL8, 0, 0);
             TL7.Dock = DockStyle.Fill;
             TL7.Location = new Point(3, 236);
             TL7.Name = "TL7";
             TL7.RowCount = 2;
-            TL7.RowStyles.Add(new RowStyle(SizeType.Percent, 14.909091F));
-            TL7.RowStyles.Add(new RowStyle(SizeType.Percent, 85.09091F));
+            TL7.RowStyles.Add(new RowStyle(SizeType.Percent, 22.46696F));
+            TL7.RowStyles.Add(new RowStyle(SizeType.Percent, 77.53304F));
             TL7.Size = new Size(447, 227);
             TL7.TabIndex = 1;
             // 
-            // materialLabel4
+            // TL8
             // 
-            materialLabel4.AutoSize = true;
-            materialLabel4.Depth = 0;
-            materialLabel4.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel4.Location = new Point(3, 0);
-            materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel4.Name = "materialLabel4";
-            materialLabel4.Size = new Size(107, 19);
-            materialLabel4.TabIndex = 0;
-            materialLabel4.Text = "materialLabel4";
+            TL8.ColumnCount = 1;
+            TL8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            TL8.Controls.Add(cbOrdenamiento, 0, 0);
+            TL8.Dock = DockStyle.Fill;
+            TL8.Location = new Point(3, 3);
+            TL8.Name = "TL8";
+            TL8.RowCount = 1;
+            TL8.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            TL8.Size = new Size(441, 45);
+            TL8.TabIndex = 4;
+            TL8.Paint += tableLayoutPanel1_Paint;
+            // 
+            // cbOrdenamiento
+            // 
+            cbOrdenamiento.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            cbOrdenamiento.AutoResize = false;
+            cbOrdenamiento.BackColor = Color.FromArgb(255, 255, 255);
+            cbOrdenamiento.Depth = 0;
+            cbOrdenamiento.DrawMode = DrawMode.OwnerDrawVariable;
+            cbOrdenamiento.DropDownHeight = 174;
+            cbOrdenamiento.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbOrdenamiento.DropDownWidth = 121;
+            cbOrdenamiento.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            cbOrdenamiento.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            cbOrdenamiento.FormattingEnabled = true;
+            cbOrdenamiento.Hint = "Selecciona el tipo de ordenamiento:";
+            cbOrdenamiento.IntegralHeight = false;
+            cbOrdenamiento.ItemHeight = 43;
+            cbOrdenamiento.Items.AddRange(new object[] { "Pre-orden", "Post-orden", "Por Niveles" });
+            cbOrdenamiento.Location = new Point(3, 3);
+            cbOrdenamiento.MaxDropDownItems = 4;
+            cbOrdenamiento.MouseState = MaterialSkin.MouseState.OUT;
+            cbOrdenamiento.Name = "cbOrdenamiento";
+            cbOrdenamiento.Size = new Size(435, 49);
+            cbOrdenamiento.StartIndex = 0;
+            cbOrdenamiento.TabIndex = 0;
+            cbOrdenamiento.SelectedIndexChanged += cbOrdenamiento_SelectedIndexChanged;
             // 
             // tabPage2
             // 
@@ -323,19 +366,21 @@
             Name = "FrmPrincipal";
             Text = "Estructuras de Árboles y Grafos";
             Load += FrmPrincipal_Load;
+            Resize += FrmPrincipal_Load;
             tabGrafos.ResumeLayout(false);
             TabGestionEmpresarial.ResumeLayout(false);
             materialCard1.ResumeLayout(false);
             TL1.ResumeLayout(false);
             TL2.ResumeLayout(false);
             TL4.ResumeLayout(false);
+            TL4.PerformLayout();
             TL6.ResumeLayout(false);
             TL6.PerformLayout();
             TL3.ResumeLayout(false);
             TL5.ResumeLayout(false);
             TL5.PerformLayout();
             TL7.ResumeLayout(false);
-            TL7.PerformLayout();
+            TL8.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -357,9 +402,10 @@
         private ListView lvEstadisticas;
         private TableLayoutPanel TL7;
         private MaterialSkin.Controls.MaterialButton btnBuscar;
-        private MaterialSkin.Controls.MaterialLabel lbArbol;
-        private MaterialSkin.Controls.MaterialLabel materialLabel3;
-        private MaterialSkin.Controls.MaterialLabel materialLabel2;
-        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private TableLayoutPanel TL8;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel lbTitulo;
+        private MaterialSkin.Controls.MaterialLabel lbEstadisticas;
+        public MaterialSkin.Controls.MaterialComboBox cbOrdenamiento;
     }
 }

@@ -22,6 +22,14 @@ namespace casoDeEstudio
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+
+            materialSkinManager.ColorScheme = new ColorScheme(
+                Primary.BlueGrey800, 
+                Primary.BlueGrey900, 
+                Primary.BlueGrey500,
+                Accent.Teal700,
+                TextShade.WHITE
+                );
         }
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
@@ -41,6 +49,21 @@ namespace casoDeEstudio
         }
 
         private void TL3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void materialLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbOrdenamiento_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
