@@ -46,6 +46,7 @@
             TL7 = new TableLayoutPanel();
             TL8 = new TableLayoutPanel();
             cbOrdenamiento = new MaterialSkin.Controls.MaterialComboBox();
+            mltOrden = new MaterialSkin.Controls.MaterialMultiLineTextBox2();
             tabPage2 = new TabPage();
             TabL1 = new TableLayoutPanel();
             tabGrafos.SuspendLayout();
@@ -283,6 +284,7 @@
             TL7.ColumnCount = 1;
             TL7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             TL7.Controls.Add(TL8, 0, 0);
+            TL7.Controls.Add(mltOrden, 0, 1);
             TL7.Dock = DockStyle.Fill;
             TL7.Location = new Point(3, 236);
             TL7.Name = "TL7";
@@ -331,6 +333,31 @@
             cbOrdenamiento.StartIndex = 0;
             cbOrdenamiento.TabIndex = 0;
             cbOrdenamiento.SelectedIndexChanged += cbOrdenamiento_SelectedIndexChanged;
+            // 
+            // mltOrden
+            // 
+            mltOrden.AnimateReadOnly = false;
+            mltOrden.BackgroundImageLayout = ImageLayout.None;
+            mltOrden.CharacterCasing = CharacterCasing.Normal;
+            mltOrden.Depth = 0;
+            mltOrden.Dock = DockStyle.Fill;
+            mltOrden.HideSelection = true;
+            mltOrden.Location = new Point(3, 54);
+            mltOrden.MaxLength = 32767;
+            mltOrden.MouseState = MaterialSkin.MouseState.OUT;
+            mltOrden.Name = "mltOrden";
+            mltOrden.PasswordChar = '\0';
+            mltOrden.ReadOnly = true;
+            mltOrden.ScrollBars = ScrollBars.Vertical;
+            mltOrden.SelectedText = "";
+            mltOrden.SelectionLength = 0;
+            mltOrden.SelectionStart = 0;
+            mltOrden.ShortcutsEnabled = true;
+            mltOrden.Size = new Size(441, 170);
+            mltOrden.TabIndex = 5;
+            mltOrden.TabStop = false;
+            mltOrden.TextAlign = HorizontalAlignment.Left;
+            mltOrden.UseSystemPasswordChar = false;
             // 
             // tabPage2
             // 
@@ -407,5 +434,6 @@
         private MaterialSkin.Controls.MaterialLabel lbTitulo;
         private MaterialSkin.Controls.MaterialLabel lbEstadisticas;
         public MaterialSkin.Controls.MaterialComboBox cbOrdenamiento;
+        private MaterialSkin.Controls.MaterialMultiLineTextBox2 mltOrden;
     }
 }
