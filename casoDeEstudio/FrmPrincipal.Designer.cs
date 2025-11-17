@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             tabGrafos = new TabControl();
             TabGestionEmpresarial = new TabPage();
             materialCard1 = new MaterialSkin.Controls.MaterialCard();
@@ -36,9 +37,13 @@
             TL4 = new TableLayoutPanel();
             lbTitulo = new MaterialSkin.Controls.MaterialLabel();
             tvArbol = new TreeView();
+            cmsARbol = new ContextMenuStrip(components);
+            agregarCargoToolStripMenuItem = new ToolStripMenuItem();
+            elimiarCargoToolStripMenuItem = new ToolStripMenuItem();
+            renombrarToolStripMenuItem = new ToolStripMenuItem();
             TL6 = new TableLayoutPanel();
             btnBuscar = new MaterialSkin.Controls.MaterialButton();
-            materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            lbActualización = new MaterialSkin.Controls.MaterialLabel();
             TL3 = new TableLayoutPanel();
             TL5 = new TableLayoutPanel();
             lbEstadisticas = new MaterialSkin.Controls.MaterialLabel();
@@ -55,6 +60,7 @@
             TL1.SuspendLayout();
             TL2.SuspendLayout();
             TL4.SuspendLayout();
+            cmsARbol.SuspendLayout();
             TL6.SuspendLayout();
             TL3.SuspendLayout();
             TL5.SuspendLayout();
@@ -167,11 +173,38 @@
             // 
             // tvArbol
             // 
+            tvArbol.ContextMenuStrip = cmsARbol;
             tvArbol.Dock = DockStyle.Fill;
             tvArbol.Location = new Point(3, 31);
             tvArbol.Name = "tvArbol";
             tvArbol.Size = new Size(457, 387);
             tvArbol.TabIndex = 1;
+            tvArbol.AfterSelect += tvArbol_AfterSelect;
+            // 
+            // cmsARbol
+            // 
+            cmsARbol.ImageScalingSize = new Size(20, 20);
+            cmsARbol.Items.AddRange(new ToolStripItem[] { agregarCargoToolStripMenuItem, elimiarCargoToolStripMenuItem, renombrarToolStripMenuItem });
+            cmsARbol.Name = "cmsARbol";
+            cmsARbol.Size = new Size(177, 76);
+            // 
+            // agregarCargoToolStripMenuItem
+            // 
+            agregarCargoToolStripMenuItem.Name = "agregarCargoToolStripMenuItem";
+            agregarCargoToolStripMenuItem.Size = new Size(176, 24);
+            agregarCargoToolStripMenuItem.Text = "Agregar Cargo";
+            // 
+            // elimiarCargoToolStripMenuItem
+            // 
+            elimiarCargoToolStripMenuItem.Name = "elimiarCargoToolStripMenuItem";
+            elimiarCargoToolStripMenuItem.Size = new Size(176, 24);
+            elimiarCargoToolStripMenuItem.Text = "Elimiar Cargo";
+            // 
+            // renombrarToolStripMenuItem
+            // 
+            renombrarToolStripMenuItem.Name = "renombrarToolStripMenuItem";
+            renombrarToolStripMenuItem.Size = new Size(176, 24);
+            renombrarToolStripMenuItem.Text = "Renombrar";
             // 
             // TL6
             // 
@@ -179,7 +212,7 @@
             TL6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 59.39525F));
             TL6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40.60475F));
             TL6.Controls.Add(btnBuscar, 1, 0);
-            TL6.Controls.Add(materialLabel1, 0, 0);
+            TL6.Controls.Add(lbActualización, 0, 0);
             TL6.Dock = DockStyle.Fill;
             TL6.Location = new Point(3, 430);
             TL6.Name = "TL6";
@@ -208,20 +241,20 @@
             btnBuscar.UseAccentColor = false;
             btnBuscar.UseVisualStyleBackColor = true;
             // 
-            // materialLabel1
+            // lbActualización
             // 
-            materialLabel1.AutoSize = true;
-            materialLabel1.Depth = 0;
-            materialLabel1.Dock = DockStyle.Fill;
-            materialLabel1.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
-            materialLabel1.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
-            materialLabel1.Location = new Point(3, 0);
-            materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel1.Name = "materialLabel1";
-            materialLabel1.Size = new Size(269, 33);
-            materialLabel1.TabIndex = 1;
-            materialLabel1.Text = "Mensaje de actualización";
-            materialLabel1.TextAlign = ContentAlignment.MiddleCenter;
+            lbActualización.AutoSize = true;
+            lbActualización.Depth = 0;
+            lbActualización.Dock = DockStyle.Fill;
+            lbActualización.Font = new Font("Roboto Medium", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            lbActualización.FontType = MaterialSkin.MaterialSkinManager.fontType.Subtitle2;
+            lbActualización.Location = new Point(3, 0);
+            lbActualización.MouseState = MaterialSkin.MouseState.HOVER;
+            lbActualización.Name = "lbActualización";
+            lbActualización.Size = new Size(269, 33);
+            lbActualización.TabIndex = 1;
+            lbActualización.Text = "Mensaje de actualización";
+            lbActualización.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // TL3
             // 
@@ -401,6 +434,7 @@
             TL2.ResumeLayout(false);
             TL4.ResumeLayout(false);
             TL4.PerformLayout();
+            cmsARbol.ResumeLayout(false);
             TL6.ResumeLayout(false);
             TL6.PerformLayout();
             TL3.ResumeLayout(false);
@@ -430,10 +464,14 @@
         private TableLayoutPanel TL7;
         private MaterialSkin.Controls.MaterialButton btnBuscar;
         private TableLayoutPanel TL8;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialLabel lbActualización;
         private MaterialSkin.Controls.MaterialLabel lbTitulo;
         private MaterialSkin.Controls.MaterialLabel lbEstadisticas;
         public MaterialSkin.Controls.MaterialComboBox cbOrdenamiento;
         private MaterialSkin.Controls.MaterialMultiLineTextBox2 mltOrden;
+        private ContextMenuStrip cmsARbol;
+        private ToolStripMenuItem agregarCargoToolStripMenuItem;
+        private ToolStripMenuItem elimiarCargoToolStripMenuItem;
+        private ToolStripMenuItem renombrarToolStripMenuItem;
     }
 }

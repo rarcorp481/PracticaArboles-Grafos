@@ -24,8 +24,8 @@ namespace casoDeEstudio
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
 
             materialSkinManager.ColorScheme = new ColorScheme(
-                Primary.BlueGrey800, 
-                Primary.BlueGrey900, 
+                Primary.BlueGrey800,
+                Primary.BlueGrey900,
                 Primary.BlueGrey500,
                 Accent.Teal700,
                 TextShade.WHITE
@@ -64,6 +64,11 @@ namespace casoDeEstudio
         }
 
         private void cbOrdenamiento_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tvArbol_AfterSelect(object sender, TreeViewEventArgs e)
         {
 
         }
