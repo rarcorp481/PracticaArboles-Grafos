@@ -22,11 +22,10 @@ namespace casoDeEstudio
         {
             InitializeComponent();
 
-            var materialSkinManager = MaterialSkinManager.Instance; // Obtiene la instancia del administrador de MaterialSkin
-            materialSkinManager.AddFormToManage(this); // Agrega el formulario al administrador de MaterialSkin
-            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT; // Tema del formulario
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
 
-            // Esquema de colore del formulario
             materialSkinManager.ColorScheme = new ColorScheme(
                 Primary.BlueGrey800,
                 Primary.BlueGrey900,
@@ -42,18 +41,16 @@ namespace casoDeEstudio
             ActualizarEstadisticas();
         }
 
-
+        // FIX: Ahora este evento dispara la actualización de estadísticas al tocar un nodo
         private void tvArbol_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
+            ActualizarEstadisticas(); //added
         }
-
 
         // BUTTONS & COMBOBOX:
 
         private void BtnBuscarArbol_Click(object sender, EventArgs e)
         {
-            // botón buscar cargo
             if (tvArbol.Nodes.Count == 0)
                 MessageBox.Show("No existen nodos en el Árbol de Jerarquía Empresarial. Primero añade algunos para buscar", "Error: tvArbol.Nodes.Count == 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
@@ -63,84 +60,92 @@ namespace casoDeEstudio
                 if (string.IsNullOrWhiteSpace(nombre)) return;
                 string textoBusquedaLimpio = nombre.ToLower().Replace(" ", "");
 
-                foreach (TreeNode nodo in tvArbol.Nodes)
+                TreeNode nodoEncontrado = BuscarRecursivo(tvArbol.Nodes, textoBusquedaLimpio); //added
+
+                if (nodoEncontrado != null) //added
                 {
-                    string textoNodoLimpio = nodo.Text.ToLower().Replace(" ", "");
-                    if (textoNodoLimpio.Contains(textoBusquedaLimpio))
-                    {
-                        MessageBox.Show($"Se han encontrado coincidencias con tu búsqueda '{nombre}'", "Resultado de búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        tvArbol.SelectedNode = nodo;
-                        nodo.EnsureVisible();
-                    }
-                    else
-                    {
-                        MessageBox.Show($"No se han encontrado coincidencias. El cargo no está dentro del Esquema de Jerarquía", "Sin coincidencias", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
+                    MessageBox.Show($"Se han encontrado coincidencias con tu búsqueda '{nombre}'", "Resultado de búsqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    tvArbol.SelectedNode = nodoEncontrado; //added
+                    tvArbol.Focus(); //added
+                    nodoEncontrado.EnsureVisible(); //added
+                }
+                else //added
+                {
+                    MessageBox.Show($"No se han encontrado coincidencias. El cargo no está dentro del Esquema de Jerarquía", "Sin coincidencias", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-
-
         }
+
+        private TreeNode BuscarRecursivo(TreeNodeCollection nodos, string busqueda) //added
+        {
+            foreach (TreeNode nodo in nodos) //added
+            {
+                string textoNodoLimpio = nodo.Text.ToLower().Replace(" ", ""); //added
+                if (textoNodoLimpio.Contains(busqueda)) return nodo; //added
+
+                if (nodo.Nodes.Count > 0) //added
+                {
+                    TreeNode encontrado = BuscarRecursivo(nodo.Nodes, busqueda); //added
+                    if (encontrado != null) return encontrado; //added
+                }
+            }
+            return null; //added
+        }
+
         private void agregarCargoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // agregar cargo
             string nombreCargo = ShowInputDialog("Ingerese el nombre del nuevo cargo:", "Nuevo nodo");
 
-            // devolver si no ha escrito el nombre
             if (string.IsNullOrWhiteSpace(nombreCargo)) return;
 
-            //si el árbol está vacío, crear la raíz
             if (tvArbol.Nodes.Count == 0)
             {
                 TreeNode raiz = new TreeNode(nombreCargo);
                 tvArbol.Nodes.Add(raiz);
                 lbActualización.Text = $"Raíz '{nombreCargo}' creada exitosamente";
             }
-            // por si tiene un nodo seleccionado, agregar como hijo de ese nodo
             else if (tvArbol.SelectedNode != null)
             {
                 tvArbol.SelectedNode.Nodes.Add(nombreCargo);
                 tvArbol.SelectedNode.Expand();
                 lbActualización.Text = $"Nodo '{nombreCargo}' agregado exitosamente como hijo de '{tvArbol.SelectedNode.Text}'";
-
             }
+            ActualizarEstadisticas(); //added
         }
+
         private void elimiarCargoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // eliminar cargo
-            // Muestra el mensaje de error por si no existen nodos que eliminar (Nodes.Count == 0)
             if (tvArbol.Nodes.Count == 0) MessageBox.Show("No existen nodos en el Árbol de Jerarquía Empresarial. Primero añade algunos para eliminar", "Error: tvArbol.Nodes.Count == 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //Verifica que el nodo seleccionado no sea null
             else if (tvArbol.SelectedNode != null)
             {
-                string nombre = tvArbol.SelectedNode.Text; // Le asigna el texto del nodo a a variable nombre
-                DialogResult = MessageBox.Show($"¿Estás seguro de querer eliminar el nodo '{nombre}' junto a todos sus subordinados?", "Confirmar elección", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                string nombre = tvArbol.SelectedNode.Text;
+                DialogResult resultado = MessageBox.Show($"¿Estás seguro de querer eliminar el nodo '{nombre}' junto a todos sus subordinados?", "Confirmar elección", MessageBoxButtons.YesNo, MessageBoxIcon.Warning); //added
 
-                if (DialogResult == DialogResult.Yes)
+                if (resultado == DialogResult.Yes) //added
                 {
                     tvArbol.SelectedNode.Remove();
                     lbActualización.Text = $"El nodo '{nombre}' junto a todos sus subordinados ha sido eliminado exitosamente";
                     ActualizarEstadisticas();
                 }
             }
-            //En caso de que el usuario no seleccione ningún elemento, se muestra este mensaje de error
             else
             {
                 MessageBox.Show("Selecciona un elemento para borrar", "Error: Nodos Seleccionados == null", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void renombrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // renombrar cargo
-            //Verifica que el árbol tenga nodos, de lo contrario manda el mensaje de error
             if (tvArbol.Nodes.Count == 0)
                 MessageBox.Show("No existen nodos en el Árbol de Jerarquía Empresarial. Primero añade algunos para renombrar", "Error: tvArbol.Nodes.Count == 0", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (tvArbol.SelectedNode != null)
             {
                 string nodoSeleccionado = tvArbol.SelectedNode.Text;
-                string nombre = ShowInputDialog("Ingrese el nuevo nombre para el nodo seleccionado", "Renombrar nodo");
-                if (string.IsNullOrWhiteSpace(nombre)) return; //Devuelve si el user solo escribió espacios vacios o nada
-                tvArbol.SelectedNode.Text = nombre; //Se pone abajo del verificador de espacios vacíos, para que al cancelar la acción no devuelva nada
+                string nombre = ShowInputDialog($"Ingrese el nuevo nombre para el nodo {nodoSeleccionado}", "Renombrar nodo"); //added
+
+                if (string.IsNullOrWhiteSpace(nombre)) return;
+
+                tvArbol.SelectedNode.Text = nombre; //added
                 lbActualización.Text = $"El nodo '{nodoSeleccionado}' ha sido renombrado exitosamente como '{nombre}'";
             }
             else MessageBox.Show("Sin nodos seleccionados. Selecciona uno para cambiar su nombre", "Error: Nodos seleccionados == null", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -172,21 +177,21 @@ namespace casoDeEstudio
             }
 
             mltOrden.Text = resultado.ToString();
+            mltOrden.Refresh(); //added
         }
 
-        // --- Algoritmos Recursivos ---
         private void RecorridoPreOrden(TreeNode nodo, StringBuilder sb)
         {
             if (nodo == null) return;
-            sb.Append(nodo.Text + " -> "); // Raíz
-            foreach (TreeNode hijo in nodo.Nodes) RecorridoPreOrden(hijo, sb); // Hijos
+            sb.Append(nodo.Text + " -> ");
+            foreach (TreeNode hijo in nodo.Nodes) RecorridoPreOrden(hijo, sb);
         }
 
         private void RecorridoPostOrden(TreeNode nodo, StringBuilder sb)
         {
             if (nodo == null) return;
-            foreach (TreeNode hijo in nodo.Nodes) RecorridoPostOrden(hijo, sb); // Hijos
-            sb.Append(nodo.Text + " -> "); // Raíz al final
+            foreach (TreeNode hijo in nodo.Nodes) RecorridoPostOrden(hijo, sb);
+            sb.Append(nodo.Text + " -> ");
         }
 
         private void RecorridoPorNiveles(TreeNode raiz, StringBuilder sb)
@@ -211,18 +216,18 @@ namespace casoDeEstudio
         {
             if (tvArbol.Nodes.Count == 0)
             {
-                // Actualiza el ListView o Label
-                ActualizarListViewStats(0, 0);
+                ActualizarListViewStats(0, 0, 0); //added (Argumentos extra)
                 return;
             }
 
-            // Contar nodos (TreeView tiene método nativo)
             int totalNodos = tvArbol.GetNodeCount(true);
-
-            // Calcular Altura (Necesitamos recursividad manual)
             int altura = CalcularAltura(tvArbol.Nodes[0]);
+            int totalHojasArbol = ContarHojasRecursivo(tvArbol.Nodes[0]); //added
 
-            ActualizarListViewStats(totalNodos, altura);
+            ActualizarListViewStats(totalNodos, altura, totalHojasArbol); //added
+
+            // FIX: Forzar actualización del texto de ordenamiento si hay algo seleccionado en el combo
+            if (cbOrdenamiento.SelectedIndex > -1) cbOrdenamiento_SelectedIndexChanged(null, null); //added
         }
 
         private int CalcularAltura(TreeNode nodo)
@@ -236,35 +241,53 @@ namespace casoDeEstudio
             return max + 1;
         }
 
-        private void ActualizarListViewStats(int total, int niveles)
+        // Método nuevo para contar hojas (Nodos sin hijos)
+        private int ContarHojasRecursivo(TreeNode nodo) //added
         {
-            // Opción A: Usar el Label (Más fácil)
-            // lbEstadisticas.Text = $"Estadísticas: Total Cargos: {total} | Niveles: {niveles}";
-
-            // Opción B: Usar el ListView que tienes en el diseño
-            lvEstadisticas.Clear();
-            lvEstadisticas.View = View.Details;
-            lvEstadisticas.Columns.Add("Métrica", 150);
-            lvEstadisticas.Columns.Add("Valor", 100);
-
-            var item1 = new ListViewItem("Total Cargos");
-            item1.SubItems.Add(total.ToString());
-
-            var item2 = new ListViewItem("Niveles Jerarquía");
-            item2.SubItems.Add(niveles.ToString());
-
-            lvEstadisticas.Items.Add(item1);
-            lvEstadisticas.Items.Add(item2);
+            if (nodo.Nodes.Count == 0) return 1; //added
+            int suma = 0; //added
+            foreach (TreeNode hijo in nodo.Nodes) suma += ContarHojasRecursivo(hijo); //added
+            return suma; //added
         }
 
-        // METODOS:
+        private void ActualizarListViewStats(int total, int niveles, int totalHojas) //added
+        {
+            lvEstadisticas.Clear();
+            lvEstadisticas.View = View.Details;
+            lvEstadisticas.Columns.Add("Métrica", 160); //added (Ancho ajustado)
+            lvEstadisticas.Columns.Add("Valor", 80);   //added
+
+            // 1. ESTADÍSTICAS GENERALES DEL ÁRBOL
+            lvEstadisticas.Items.Add(new ListViewItem(new[] { "--- ÁRBOL GENERAL ---", "" })); //added
+            lvEstadisticas.Items.Add(new ListViewItem(new[] { "Total Cargos", total.ToString() }));
+            lvEstadisticas.Items.Add(new ListViewItem(new[] { "Total Hojas (Sin cargo a cargo)", totalHojas.ToString() })); //added
+            lvEstadisticas.Items.Add(new ListViewItem(new[] { "Altura Máxima", niveles.ToString() }));
+
+            // 2. ESTADÍSTICAS DEL NODO SELECCIONADO
+            if (tvArbol.SelectedNode != null) //added
+            {
+                TreeNode sel = tvArbol.SelectedNode; //added
+                int hojasRama = ContarHojasRecursivo(sel); //added
+
+                lvEstadisticas.Items.Add(new ListViewItem(new[] { "", "" })); //added (Separador)
+                lvEstadisticas.Items.Add(new ListViewItem(new[] { "--- SELECCIONADO ---", "" })); //added
+                lvEstadisticas.Items.Add(new ListViewItem(new[] { "Cargo", sel.Text })); //added
+                lvEstadisticas.Items.Add(new ListViewItem(new[] { "Nivel Jerárquico", sel.Level.ToString() })); //added
+                lvEstadisticas.Items.Add(new ListViewItem(new[] { "Subordinados Directos", sel.Nodes.Count.ToString() })); //added
+                lvEstadisticas.Items.Add(new ListViewItem(new[] { "Hojas en esta rama", hojasRama.ToString() })); //added
+            }
+        }
 
         public static string ShowInputDialog(string texto, string titulo)
         {
+            int anchoForm = 400; //added
+            int margen = 20; //added
+            int anchoUtil = anchoForm - (margen * 2); //added
+
             Form prompt = new Form()
             {
-                Width = 400,
-                Height = 180,
+                Width = anchoForm, //added
+                Height = 200, //added
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = titulo,
                 StartPosition = FormStartPosition.CenterScreen,
@@ -272,68 +295,47 @@ namespace casoDeEstudio
                 MaximizeBox = false
             };
 
-            Label textLabel = new Label() { Left = 20, Top = 20, Text = texto, AutoSize = true };
-            TextBox textBox = new TextBox() { Left = 20, Top = 50, Width = 340 };
-            Button confirmation = new Button() { Text = "Aceptar", Left = 240, Width = 100, Top = 90 };
+            Label textLabel = new Label()
+            {
+                Left = margen, //added
+                Top = 20,
+                Text = texto,
+                AutoSize = true,
+                MaximumSize = new Size(anchoUtil, 0) //added
+            };
 
-            // resultado de dialogo none (para que no se cierre en el caso de que el usuario no escriba nada o solo espacios)
+            prompt.Controls.Add(textLabel); //added
+
+            int espacioY = textLabel.Bottom + 15; //added
+
+            TextBox textBox = new TextBox() { Left = margen, Top = espacioY, Width = anchoUtil }; //added
+            Button confirmation = new Button() { Text = "Aceptar", Left = 240, Width = 100, Top = espacioY + 35 }; //added
+
+            prompt.Height = confirmation.Bottom + 50; //added
+
             confirmation.DialogResult = DialogResult.None;
 
-            // Lógica para el click 
             confirmation.Click += (sender, e) =>
             {
-                //Si el no escribe nada o solo espacios en blanco
                 if (string.IsNullOrWhiteSpace(textBox.Text))
                 {
-                    MessageBox.Show("¡El nombre es obligatorio! Por favor ingrese un dato.", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("¡El nombre es obligatorio!", "Dato Requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     textBox.Focus();
                 }
                 else
                 {
-                    prompt.DialogResult = DialogResult.OK; // Autorizar el cierre solo si todo sale bien
+                    prompt.DialogResult = DialogResult.OK;
                     prompt.Close();
                 }
             };
 
             prompt.Controls.Add(textBox);
             prompt.Controls.Add(confirmation);
-            prompt.Controls.Add(textLabel);
-
             prompt.AcceptButton = confirmation;
 
-            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : ""; //operador ternario. Devuelve el texto que el user escribió si cerró la ventana con el botón "Aceptar"
+            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
 
         }
-
-        private TreeNode BuscarRecursivo(TreeNodeCollection nodos, string busqueda)
-        {
-            // Revisa cada nodo en la lista actual
-            foreach (TreeNode nodo in nodos)
-            {
-                // 1. Prepara el texto del nodo actual igual que tu búsqueda
-                string textoNodoLimpio = nodo.Text.ToLower().Replace(" ", "");
-
-                // 2. ¿Es este?
-                if (textoNodoLimpio.Contains(busqueda))
-                {
-                    return nodo; // ¡Lo encontré! Devuelvo el nodo y termino.
-                }
-
-                // 3. Si no es este, ¿tendrá hijos? ¡A buscar adentro! (Recursividad)
-                if (nodo.Nodes.Count > 0)
-                {
-                    TreeNode encontradoEnHijos = BuscarRecursivo(nodo.Nodes, busqueda);
-                    if (encontradoEnHijos != null)
-                    {
-                        return encontradoEnHijos; // ¡Lo encontró un hijo! Lo devuelvo hacia arriba.
-                    }
-                }
-            }
-
-            return null; // Si revisé todo y no estaba aquí.
-        }
-
-        // lABELS:
 
         private void materialLabel2_Click(object sender, EventArgs e) { }
         private void lbEstadisticas_Click(object sender, EventArgs e) { }
@@ -341,14 +343,9 @@ namespace casoDeEstudio
         private void mltOrden_Click(object sender, EventArgs e) { }
         private void lbActualización_Click_1(object sender, EventArgs e) { }
         private void mltOrden_Click_1(object sender, EventArgs e) { }
-
-
-        // TABLELAYOUTS:
-
         private void TL1_Paint(object sender, PaintEventArgs e) { }
         private void TL2_Paint(object sender, PaintEventArgs e) { }
         private void TL3_Paint(object sender, PaintEventArgs e) { }
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
-
     }
 }

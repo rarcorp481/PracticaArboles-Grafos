@@ -132,8 +132,8 @@
             TL2.Location = new Point(3, 3);
             TL2.Name = "TL2";
             TL2.RowCount = 2;
-            TL2.RowStyles.Add(new RowStyle(SizeType.Percent, 85.74258F));
-            TL2.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2574253F));
+            TL2.RowStyles.Add(new RowStyle(SizeType.Percent, 77.22772F));
+            TL2.RowStyles.Add(new RowStyle(SizeType.Percent, 22.7722778F));
             TL2.Size = new Size(476, 505);
             TL2.TabIndex = 0;
             // 
@@ -150,7 +150,7 @@
             TL4.RowStyles.Add(new RowStyle(SizeType.Percent, 6.67976427F));
             TL4.RowStyles.Add(new RowStyle(SizeType.Percent, 93.32024F));
             TL4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            TL4.Size = new Size(470, 427);
+            TL4.Size = new Size(470, 384);
             TL4.TabIndex = 0;
             // 
             // lbTitulo
@@ -164,7 +164,7 @@
             lbTitulo.Location = new Point(3, 0);
             lbTitulo.MouseState = MaterialSkin.MouseState.HOVER;
             lbTitulo.Name = "lbTitulo";
-            lbTitulo.Size = new Size(464, 28);
+            lbTitulo.Size = new Size(464, 25);
             lbTitulo.TabIndex = 2;
             lbTitulo.Text = "Esquema Jerárquico de la Empresa:";
             lbTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -173,9 +173,9 @@
             // 
             tvArbol.ContextMenuStrip = cmsArbol;
             tvArbol.Dock = DockStyle.Fill;
-            tvArbol.Location = new Point(3, 31);
+            tvArbol.Location = new Point(3, 28);
             tvArbol.Name = "tvArbol";
-            tvArbol.Size = new Size(464, 393);
+            tvArbol.Size = new Size(464, 353);
             tvArbol.TabIndex = 1;
             // 
             // TL6
@@ -186,11 +186,11 @@
             TL6.Controls.Add(btnBuscarArbol, 1, 0);
             TL6.Controls.Add(lbActualización, 0, 0);
             TL6.Dock = DockStyle.Fill;
-            TL6.Location = new Point(3, 436);
+            TL6.Location = new Point(3, 393);
             TL6.Name = "TL6";
             TL6.RowCount = 1;
             TL6.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            TL6.Size = new Size(470, 66);
+            TL6.Size = new Size(470, 109);
             TL6.TabIndex = 1;
             // 
             // btnBuscarArbol
@@ -206,7 +206,7 @@
             btnBuscarArbol.MouseState = MaterialSkin.MouseState.HOVER;
             btnBuscarArbol.Name = "btnBuscarArbol";
             btnBuscarArbol.NoAccentTextColor = Color.Empty;
-            btnBuscarArbol.Size = new Size(183, 54);
+            btnBuscarArbol.Size = new Size(183, 97);
             btnBuscarArbol.TabIndex = 0;
             btnBuscarArbol.Text = "Buscar Cargo";
             btnBuscarArbol.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -223,7 +223,7 @@
             lbActualización.Location = new Point(3, 0);
             lbActualización.MouseState = MaterialSkin.MouseState.HOVER;
             lbActualización.Name = "lbActualización";
-            lbActualización.Size = new Size(273, 66);
+            lbActualización.Size = new Size(273, 109);
             lbActualización.TabIndex = 1;
             lbActualización.TextAlign = ContentAlignment.MiddleCenter;
             lbActualización.Click += lbActualización_Click_1;
