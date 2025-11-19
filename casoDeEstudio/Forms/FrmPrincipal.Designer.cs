@@ -80,7 +80,7 @@
             // 
             btnEliminarArbol.Name = "btnEliminarArbol";
             btnEliminarArbol.Size = new Size(176, 24);
-            btnEliminarArbol.Text = "Elimiar Cargo";
+            btnEliminarArbol.Text = "Eliminar Cargo";
             btnEliminarArbol.Click += elimiarCargoToolStripMenuItem_Click;
             // 
             // btnRenombrarArbol
