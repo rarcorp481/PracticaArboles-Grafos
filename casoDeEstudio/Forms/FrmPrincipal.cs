@@ -176,8 +176,8 @@ namespace casoDeEstudio
         {
             lvEstadisticas.Clear();
             lvEstadisticas.View = View.Details;
-            lvEstadisticas.Columns.Add("Métrica", 900); // Ancho ajustado para mejor visualización
-            lvEstadisticas.Columns.Add("Valor", 300);   
+            lvEstadisticas.Columns.Add("Métrica", 250); // Ancho ajustado para mejor visualización
+            lvEstadisticas.Columns.Add("Valor", 250);   
 
             // 1. ESTADÍSTICAS GENERALES DEL ÁRBOL
             lvEstadisticas.Items.Add(new ListViewItem(new[] { "--- ÁRBOL GENERAL ---", "" })); 
